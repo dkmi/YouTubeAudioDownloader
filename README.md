@@ -1,63 +1,63 @@
 # YouTubeAudioDownloaderBundledIntel
 
-Малко macOS SwiftUI приложение за Xcode, което сваля аудио или MP4 видео от YouTube линк.
+A small macOS SwiftUI app for Xcode that downloads audio or MP4 video from a YouTube URL.
 
-Този вариант пакетира нужните външни инструменти вътре в проекта:
+This version bundles the required external tools within the project:
 
 - `yt-dlp`
 - `ffmpeg`
 - `ffprobe`
 
-## Изисквания
+## Requirements
 
 - macOS 14+
 - Xcode 15+
 - Intel Mac
 
-## Стартиране
+## Getting Started
 
-1. В Terminal отвори папката на проекта.
-2. Пусни `./Scripts/install-intel-tools.sh`.
-3. Отвори `YouTubeAudioDownloader.xcodeproj` в Xcode.
-4. Избери схемата `YouTubeAudioDownloader`.
-5. В горната лента избери destination `My Mac`, не iPhone/iPad симулатор.
-6. Натисни Run.
-7. Постави YouTube линк, избери формат и натисни `Свали аудиото` или `Свали видеото`.
+1. Open the project directory in Terminal.
+2. Run `./Scripts/install-intel-tools.sh`.
+3. Open `YouTubeAudioDownloader.xcodeproj` in Xcode.
+4. Select the `YouTubeAudioDownloader` scheme.
+5. Select `My Mac` as the run destination in the top toolbar, rather than an iPhone or iPad simulator.
+6. Click Run.
+7. Paste a YouTube URL, choose a format, and click the download audio or download video button. The app's interface is in Bulgarian.
 
-Файловете по подразбиране се записват в `~/Music/YouTube Downloads`.
+Files are saved to `~/Music/YouTube Downloads` by default.
 
-## Build на самостоятелна app версия
+## Building a Standalone App
 
-От Terminal:
+Run the following in Terminal:
 
 ```bash
 ./Scripts/build-release.sh
 ```
 
-Готовият `.app` bundle ще бъде в:
+The resulting `.app` bundle will be located at:
 
 ```text
 build/Build/Products/Release/YouTubeAudioDownloader.app
 ```
 
-Ако преди това Xcode е build-нал стара версия без `Tools/lib`, изчисти `DerivedData` за проекта или използвай горния script, защото той копира и подписва tools при всяко build-ване.
+If Xcode previously built an older version without `Tools/lib`, clear the project's `DerivedData` or use the script above, which copies and signs the tools on every build.
 
-## Пакетирани инструменти
+## Bundled Tools
 
-Инструментите са в:
+The tools are located in:
 
 ```text
 Sources/YouTubeAudioDownloader/Tools
 ```
 
-Този bundled вариант е за Intel macOS (`x86_64`). Папката първоначално съдържа universal `yt-dlp` и placeholder `ffmpeg/ffprobe`; `./Scripts/install-intel-tools.sh` сваля правилните Intel binaries.
+This bundled version targets Intel macOS (`x86_64`). The directory initially contains a universal `yt-dlp` binary and placeholder `ffmpeg/ffprobe` scripts; `./Scripts/install-intel-tools.sh` downloads the correct Intel binaries.
 
-Intel `ffmpeg` build-ът трябва да съдържа `libmp3lame`, за да работи MP3 режимът.
+The Intel `ffmpeg` build must include `libmp3lame` for MP3 mode to work.
 
-MP4 режимът предпочита H.264 (`avc1`) видео и M4A/AAC аудио, за да се отваря коректно с QuickTime. VLC може да пуска и MP4 файлове с VP9/AV1 видео, но QuickTime често възпроизвежда само аудиото при такива файлове.
+MP4 mode prefers H.264 (`avc1`) video and M4A/AAC audio for QuickTime compatibility. VLC can also play MP4 files containing VP9/AV1 video, but QuickTime often plays only the audio in those files.
 
-## Бележка
+## Note
 
-Ползвай приложението само за съдържание, което имаш право да сваляш, например твое съдържание, royalty-free материали или клипове с разрешение за офлайн употреба.
+Use the app only for content you have permission to download, such as your own content, royalty-free material, or videos authorized for offline use.
 
-Ако ще разпространяваш приложението извън лична употреба, прегледай `THIRD_PARTY_NOTICES.md`, защото FFmpeg build-ът има важни licensing условия.
+If you plan to distribute the app beyond personal use, review `THIRD_PARTY_NOTICES.md`, as the FFmpeg build has important licensing requirements.
