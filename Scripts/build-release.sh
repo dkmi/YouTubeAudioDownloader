@@ -10,6 +10,8 @@ xcodebuild \
   -scheme YouTubeAudioDownloader \
   -configuration Release \
   -derivedDataPath "$BUILD_DIR" \
+  ARCHS=x86_64 \
+  ONLY_ACTIVE_ARCH=YES \
   build
 
 codesign --force --deep --sign - "$APP_PATH"
